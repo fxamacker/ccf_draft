@@ -2,8 +2,8 @@
 
 Author: Faye Amacker  
 Status: ABRIDGED DRAFT  
-Date: November 28, 2022  
-Revision: 20221128f  
+Date: November 29, 2022  
+Revision: 20221129a  
 
 To simplify initial review of the most important aspects, some verbose content is left out (e.g. list of numeric values representing each built-in Cadence type).  The omitted content will be provided in a less abridged version of this document after the first review is completed.
 
@@ -628,7 +628,6 @@ type-ref =
         bstr
     )
 
-
 simple-type-id =
     bool-type-id
     / string-type-id
@@ -756,10 +755,10 @@ optional-value = nil / value
 
 array-value = [* value]
 
-dict-value = [* (k: value, v: value)]
+dict-value = [* (key: value, value: value)]
 
 ; composite-value is used to encode struct, contract, enum, event, and resource.
-composite-value = [+ (composite-field: value)]
+composite-value = [+ (field: value)]
 
 link-value = [
     path: path-value,
@@ -767,9 +766,15 @@ link-value = [
 ]
 
 path-value = [
-	  domain: uint,
+	  domain: path-domain,
 	  identifier: tstr,
 ]
+
+path-domain = domain-storage / domain-private / domain-public
+
+domain-storage = 1
+domain-private = 2
+domain-public = 3
 
 capability-value = [
 	  address: address-value,
