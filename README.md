@@ -606,7 +606,7 @@ dict-type =
     ; cbor-tag-dict-Type
     #6.138([
         key-type: inline-type,
-        element-type: inline
+        element-type: inline-type
     ])
 
 capability-type =
