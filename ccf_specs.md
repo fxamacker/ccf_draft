@@ -50,13 +50,13 @@ The goal of CCF is to provide compact, efficient, and deterministic encoding of 
 
   - More compact encoding.  Cadence type info is not repeatedly encoded unnecessarily in a message.  E.g. for a homogeneous array of a Cadence composite type, each element will not have its Cadence composite type info encoded repeatedly.
 
-  - Detachable Cadence type info. Although Cadence type info is required for decoding, CCF-based protocols have the ability to send a message's type info once instead of repeatedly sending it to the same client for all messages of that type.
+  - Detachable Cadence type info. Although Cadence type info is required for decoding, CCF-based protocols can send a message's type info once instead of repeatedly sending it to the same client for all messages of that type.
 
 CCF is designed to support:
 
 - All current and future Cadence types, including composite types.  CCF supports schemaless encoding and is extensible for new Cadence types.
 
-- Compact encoding.  Smaller encoded size is provided by:
+- Compact encoding.  Smaller encoded size is produced by:
   - CBOR's data model with CBOR Preferred Serialization, which produces more compact encoding than JSON.
   - Separate encoding of Cadence types and values to avoid repeatedly encoding the same Cadence type info unecessarily.
 
