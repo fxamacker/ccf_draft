@@ -34,7 +34,7 @@ Preliminary encoded size comparison of new CCF vs current JSON-based format usin
 - 119 bytes -- CCF with Cadence type info attached (fully self-describing)
 - 18 bytes -- CCF without Cadence type info (partially self-describing)
 
-Benchmark Comparison of JSON vs CCF using a FeesDeducted event data.
+Benchmark Comparison of JSON vs CCF using a `FeesDeducted` event data.
 
 ```
 name       old time/op    new time/op    delta
@@ -45,6 +45,7 @@ Encode-48    1.12kB ± 0%    1.07kB ± 0%   -5.24%  (p=0.000 n=20+20)
 
 name       old allocs/op  new allocs/op  delta
 Encode-48      23.0 ± 0%      13.0 ± 0%  -43.48%  (p=0.000 n=20+20)
+
 name       old time/op    new time/op    delta
 Decode-48    9.81µs ± 1%    2.31µs ± 0%  -76.46%  (p=0.000 n=20+19)
 
