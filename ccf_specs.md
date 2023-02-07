@@ -801,7 +801,7 @@ simple-type-id = &(
 ccf-typedef-and-value-message =
     ; cbor-tag-typedef-and-value
     #6.129([
-      typedef: composite-typedefs,
+      typedef: composite-typedef,
       type-and-value: inline-type-and-value 
     ])
     
