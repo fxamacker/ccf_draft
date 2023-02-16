@@ -18,7 +18,7 @@ RFC 8949 and RFC 8610 are [Internet Standards](https://en.wikipedia.org/wiki/Int
 ## Status
 
 - CCF specification is currently a DRAFT with cleanup underway to remove DRAFT status.
-- CCF codec currently implements nearly 100% of CCF specs revision [20230216a](https://github.com/fxamacker/ccf_draft/blob/699decd58c82a7566781267a25be4b4019adb464/ccf_specs.md). The CCF codec is being updated locally by @fxamacker and will be submitted as a PR to onflow/cadence as soon as it's ready for review.  CCF codec is passing JSON-Cadence tests ported and modified to CCF.  Including additional tests and comments, unit tests currently total around 7,000 lines.
+- CCF codec currently implements nearly 100% of CCF specs revision [20230216a](https://github.com/fxamacker/ccf_draft/blob/699decd58c82a7566781267a25be4b4019adb464/ccf_specs.md). The CCF codec is being updated locally by @fxamacker and all tests are passing, including JSON-Cadence tests ported and modified to CCF.  Unit tests (including comments) currently total around 7,000 lines.
 
 ### Next steps
 
