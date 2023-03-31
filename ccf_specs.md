@@ -997,12 +997,12 @@ function-value = [
     type-parameters: [
         * [
            name: tstr,
-           ? type-bound: type-value
+           type-bound: type-value / nil
         ]
     ]
     parameters: [
         * [
-            ? label: tstr,
+            label: tstr,
             identifier: tstr,
             type: type-value
         ]
