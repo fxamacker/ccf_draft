@@ -1012,8 +1012,7 @@ function-value = [
     return-type: type-value
 ]
 
-type-value =
-    / simple-type-value
+type-value = simple-type-value
     / optional-type-value
     / varsized-array-type-value
     / constsized-array-type-value
