@@ -2,8 +2,8 @@
 
 Author: Faye Amacker  
 Status: RC2  
-Date: August 4, 2023  
-Revision: 20230804a
+Date: August 10, 2023  
+Revision: 20230810a
 
 ## Abstract
 
@@ -13,7 +13,7 @@ Cadence is a resource-oriented programming language that introduces new features
 
 CCF messages can be fully self-describing or partially self-describing.  Both are more compact than JSON-based messages.  CCF-based protocols can send Cadence metadata just once for all messages of that type.  Malformed data can be detected without Cadence metadata and without creating Cadence objects.
 
-CCF defines "Deterministic CCF Encoding Requirements" and makes it optional.  It allows CCF codecs implemented in different programming languages to produce the same deterministic encodings.  CCF-based formats and protocols can balance tradeoffs by specifying how they use CCF options.
+CCF defines "Deterministic CCF Encoding Requirements" and makes it optional.  It allows CCF codecs implemented in different programming languages to produce the same deterministic encodings.  CCF-based formats and protocols can balance trade-offs by specifying how they use CCF options.
 
 CCF obsoletes [JSON-Cadence Data Interchange Format](https://developers.flow.com/cadence/json-cadence-spec) (JSON-CDC) for use cases that do not require JSON.
 
@@ -46,7 +46,7 @@ The same `FeesDeducted` event on the Flow blockchain can encode to:
 
 CCF defines all requirements for deterministic encoding (sort orders, smallest encoded forms, and Cadence-specific requirements) to allow CCF codecs implemented in different programming languages to produce the same deterministic encodings.
 
-Some requirements (such as "Deterministic CCF Encoding Requirements") are defined as optional.  Each CCF-based format or protocol can have its specification state how CCF options are used.  This allows each protocol to balance tradeoffs such as compatibility, determinism, speed, encoded data size, etc.
+Some requirements (such as "Deterministic CCF Encoding Requirements") are defined as optional.  Each CCF-based format or protocol can have its specification state how CCF options are used.  This allows each protocol to balance trade-offs such as compatibility, determinism, speed, encoded data size, etc.
 
 CCF uses CBOR and is designed to allow efficient detection and rejection of malformed messages without creating Cadence objects. This allows more costly checks for validity, etc. to be performed only on well-formed messages.
 
@@ -69,11 +69,11 @@ CCF is designed to support:
 
 - Compact encoding.  Smaller encoded size is produced by:
   - CBOR's data model with CBOR Preferred Serialization, which produces more compact encoding than JSON.
-  - Separate encoding of Cadence types and values to avoid repeatedly encoding the same Cadence type info unecessarily.
+  - Separate encoding of Cadence types and values to avoid repeatedly encoding the same Cadence type info unnecessarily.
 
 - Compact communications.  Detachable Cadence type info allows CCF-based protocols to optionally avoid resending the same Cadence type info for all messages matching that type.  CCF-based protocols can cache and uniquely identify a Cadence type so it can be matched to Cadence value (such as an event) during decoding.
 
-- Deterministic encoding.  CCF uses CBOR's Preferred Serialization to achieve deterministic encoding.  Other parts of CBOR's Core Determinisitic Encoding Requirements are not needed by this specification.
+- Deterministic encoding.  CCF uses CBOR's Preferred Serialization to achieve deterministic encoding.  Other parts of CBOR's Core Deterministic Encoding Requirements are not needed by this specification.
 
 - Early detection of malformed data.  CCF decoders can detect and reject malformed data without creating Cadence objects.  CCF decoders can detect malformed data without having Cadence type info.  If data is not malformed, then CCF decoders can proceed to detect and reject invalid CCF data as described in this document.
 
@@ -116,24 +116,34 @@ Other considerations for using CBOR include availability and quality of CBOR cod
 
 ### Interoperability and Reuse of CBOR Codecs
 
-Widely used CBOR codecs are available in various programming languages.  CCF codecs can reuse existing CBOR codecs to reduce risks.
+CBOR data can be exchanged between standards compliant CBOR codecs implemented in any programming language.
 
-In JavaScript, there are multiple widely used CBOR codecs. As one example, [hildjj/node-cbor](https://github.com/hildjj/node-cbor) is  maintained by Joe Hildebrand (former VP of Engineering at Mozilla and Distinguished Engineer at Cisco). It's a monorepo with several packages including a "cbor package compiled for use on the web, including all of its non-optional dependencies".
+Existing CBOR codecs can be used by codecs for CBOR-based formats and protocols.  CBOR codecs are available in various programming languages.  Projects implementing a CCF codec should evaluate more than one CBOR codec for standards compliance, security, and other factors.
 
-In C, Intel maintains [TinyCBOR](https://github.com/intel/tinycbor), a CBOR codec optimized for very fast operation with very small footprint.
+#### .NET Languages
 
-For .NET languages, Microsoft maintains [System.Formats.Cbor namespace](https://learn.microsoft.com/en-us/dotnet/api/system.formats.cbor), which is the CBOR codec in .Net Platform Extensions.
+Microsoft maintains [System.Formats.Cbor namespace](https://learn.microsoft.com/en-us/dotnet/api/system.formats.cbor), which is the CBOR codec in .Net Platform Extensions.
 
-In Go, [fxamacker/cbor](https://github.com/fxamacker/cbor) is used by Cadence in its [CCF codec](https://github.com/onflow/cadence/tree/master/encoding/ccf):
+#### C
+
+Intel maintains [TinyCBOR](https://github.com/intel/tinycbor), a CBOR codec optimized for very fast operation with very small footprint.
+
+#### Go
+
+[fxamacker/cbor](https://github.com/fxamacker/cbor) is used by Cadence in its [CCF codec](https://github.com/onflow/cadence/tree/master/encoding/ccf):
   - `fxamacker/cbor` was designed with security in mind and passed multiple security assessments in 2022.  A [nonconfidential security assessment](https://github.com/veraison/go-cose/blob/v1.0.0-rc.1/reports/NCC_Microsoft-go-cose-Report_2022-05-26_v1.0.pdf) produced by NCC Group for Microsoft Corporation includes parts of fxamacker/cbor.
   - `fxamacker/cbor` is used in projects by Arm Ltd., Cisco, Dapper Labs, EdgeX&nbsp;Foundry, Fraunhofer&#8209;AISEC, Linux&nbsp;Foundation, Microsoft, Mozilla, Tailscale, Teleport, [and&nbsp;others](https://github.com/fxamacker/cbor#who-uses-fxamackercbor).  Notably, it was already [used by Cadence](https://github.com/onflow/cadence/blob/master/runtime/interpreter/encode.go) for internal value encoding.
-  - `fxamacker/cbor` is maintained by the author of this document.  
+  - `fxamacker/cbor` is maintained by the author of this document.
+
+#### JavaScript
+
+[hildjj/node-cbor](https://github.com/hildjj/node-cbor) and its potential successor [hildji/cbor2](https://github.com/hildjj/cbor2) are maintained by Joe Hildebrand (former VP of Engineering at Mozilla).
 
 ### Terminology
 
 This specification uses requirements terminology, CBOR terminology, and CDDL terminology.
 
-This specification uses the following notations to specify or describe CCF:
+This specification also uses the following notations:
 - Concise Data Definition Language (CDDL) defined by [RFC 8610](https://www.rfc-editor.org/rfc/rfc8610.html).  CDDL is a notation for unambiguously expressing CBOR and JSON data structures.
 - Extended Diagnostic Notation (EDN) defined by [Appendix G of RFC 8610](https://www.rfc-editor.org/rfc/rfc8610.html#appendix-G).  EDN is a "diagnostic notation" used for conversing about encoded CBOR data items.
 
@@ -287,7 +297,7 @@ CCF decoders SHOULD allow CBOR limits to be specified and enforced, such as:
 
 For example, max number of array elements would forbid any single array in a CCF message from exceeding that many elements.
 
-The main tradeoff for decoder limits:
+The main trade-off for decoder limits:
 - limits set too high can allow memory exhaustion and other attacks to succeed.
 - limits set too low creates the possibility of being unable to decode non-malicious messages that exceeds limits.
 
@@ -324,7 +334,7 @@ It represents `130([137(4), 42])`, where:
 - `137(4)` is Cadence `Int`.
 - `42` is raw value.
 
-### Cadence Homogenous Array with Simple Type Elements
+### Cadence Homogeneous Array with Simple Type Elements
 
 Cadence `[Int]` type of value `[1, 2, 3]` encoded to JSON is 107 bytes when minified:
 
@@ -358,7 +368,7 @@ It represents `130([139(137(4)), [1, 2, 3]])`, where:
 - `139(137(4))` is Cadence array of `Int`.
 - `[1, 2, 3]` is raw value.
 
-### Cadence Heterogenous Array with Simple Type Elements
+### Cadence Heterogeneous Array with Simple Type Elements
 
 Cadence `[AnyStruct]` type of value `[1, "a", true]` encoded to JSON is 112 bytes when minified:
 
@@ -394,7 +404,7 @@ It represents `130([139(137(39)), [130([137(4), 1]), 130([137(1), "a"]), 130([13
 - `130([137(1), "a"])` is second element (`137(1)` is Cadence `String`, `"a"` is raw value).
 - `130([137(0), true]` is third element (`137(0)` is Cadence `Boolean`, `true` is raw value).
 
-### Cadence Homogenous Array with Composite Type Elements
+### Cadence Homogeneous Array with Composite Type Elements
 
 This example is for CCF in fully self-describing mode (partially self-describing mode encodes smaller messages).
 
@@ -472,7 +482,7 @@ Value data item represents `[139(136(h'')), [[1], [2], [3]]]]`, where:
 - `139(136(h''))` is Cadence array of type identified by ID `0`.
 - `[[1], [2], [3]]]` is array of `Foo` resource raw field data.
 
-### Cadence Homogenous Array with Composite Type Elements (One Field Type Is Abstract)
+### Cadence Homogeneous Array with Composite Type Elements (One Field Type Is Abstract)
 
 This example is for CCF in fully self-describing mode (partially self-describing mode encodes smaller messages).
 
@@ -1190,7 +1200,7 @@ type-value-ref =
 ;CDDL-END
 ```
 
-## Acknowledgements
+## Acknowledgments
 
 This document would not exist without Ramtin M. Seraj and Bastian Müller.
 
