@@ -10,7 +10,7 @@ Cadence Compact Format (CCF) is a binary data format designed for compact, effic
 
 CCF messages can be fully self-describing or partially self-describing. Both are more compact than JSON-based messages. CCF-based protocols can send Cadence metadata just once for all messages of that type. Malformed data can be detected without Cadence metadata and without creating Cadence objects.
 
-CCF specifies "Deterministic CCF Encoding Requirements" and makes it optional. CCF codecs implemented in different programming languages can produce the same deterministic encodings. CCF-based formats and protocols can balance trade-offs by specifying how they use CCF options.
+CCF specifies "Deterministic CCF Encoding Requirements" and makes it optional. CCF codecs implemented in different programming languages can produce the same deterministic encodings. CCF-based protocols can balance trade-offs by specifying how they use optional CCF requirements.
 
 CCF obsoletes [JSON-Cadence Data Interchange Format](https://developers.flow.com/cadence/json-cadence-spec) (JSON-CDC) for use cases that do not require JSON.
 
@@ -26,9 +26,9 @@ This document specifies Cadence Compact Format.
 
 Some requirements defined in this document are explicitly specified as optional.  
 
-It is outside the scope of this document to specify individual CCF-based formats or protocols (e.g., events).  For example, CCF-based formats or protocols MUST specify when encoders are required to emit CCF encodings that satisfy "Deterministic CCF Encoding Requirements."
+It is outside the scope of this document to specify individual CCF-based protocols (e.g., events).  For example, CCF-based protocols MUST specify when encoders are required to emit CCF encodings that satisfy "Deterministic CCF Encoding Requirements."
 
-This document does not specify how to encode version numbers of CCF itself, CCF-based formats, or CCF-based protocols.  CCF-based formats and protocols can specify an encoding that uses CalVer, SemVer, sequence-based versioning, any other versioning, or no versioning.  Some CCF-based formats or protocols may want to use CBOR Sequences ([RFC 8742](https://www.rfc-editor.org/rfc/rfc8742.html)) to provide a version number in the first CBOR data item, followed by CBOR data item(s) encoded in CCF.
+This document does not specify how to encode version numbers of CCF itself or CCF-based protocols.  CCF-based protocols can specify an encoding that uses CalVer, SemVer, sequence-based versioning, any other versioning, or no versioning.  Some CCF-based protocols may want to use CBOR Sequences ([RFC 8742](https://www.rfc-editor.org/rfc/rfc8742.html)) to provide a version number in the first CBOR data item, followed by CBOR data item(s) encoded in CCF.
 
 ## Introduction
 
@@ -43,7 +43,7 @@ The same `FeesDeducted` event on the Flow blockchain can encode to:
 
 CCF defines all requirements for deterministic encoding (sort orders, shortest forms, and Cadence-specific requirements), so that CCF codecs implemented in different programming languages can produce the same deterministic encodings.
 
-Some requirements (such as "Deterministic CCF Encoding Requirements") are specified as optional. The specification of each CCF-based format or protocol can specify how CCF options are used. This allows each protocol to balance trade-offs such as compatibility, determinism, speed, encoded data size, etc.
+Some requirements (such as "Deterministic CCF Encoding Requirements") are specified as optional. The specification of each CCF-based protocol determines how it uses optional CCF requirements. This allows each protocol to balance trade-offs such as compatibility, determinism, speed, encoded data size, etc.
 
 CCF allows efficient detection of malformed messages without creating Cadence objects. More costly validation is performed only on well-formed messages.
 
@@ -84,7 +84,7 @@ CCF is designed to support:
 
 CBOR is a binary data format specified by [RFC 8949](https://www.rfc-editor.org/info/std94) and designated by IETF as an [Internet Standard](https://www.ietf.org/rfc/std-index.txt) (STD&nbsp;94).
 
-Design goals of CBOR balances trade-offs, making it useful as a building block for new formats and protocols:
+Design goals of CBOR balances trade-offs, making it useful as a building block for new :
 
 > The Concise Binary Object Representation (CBOR) is a data format
    whose design goals include the possibility of extremely small code
@@ -92,13 +92,13 @@ Design goals of CBOR balances trade-offs, making it useful as a building block f
    for version negotiation. These design goals make it different from
    earlier binary serializations such as ASN.1 and MessagePack.
 
-CBOR is used by data formats and protocols such as [W3C&nbsp;WebAuthn](https://www.w3.org/TR/webauthn-2/), Compacted-DNS&nbsp;([RFC&nbsp;8618](https://www.rfc-editor.org/rfc/rfc8618.html)), COSE&nbsp;([IETF&nbsp;STD&nbsp;96](https://www.rfc-editor.org/info/std96)), CWT&nbsp;([RFC&nbsp;8392](https://www.rfc-editor.org/info/rfc8392)), etc.
+CBOR is used by data  such as [W3C&nbsp;WebAuthn](https://www.w3.org/TR/webauthn-2/), Compacted-DNS&nbsp;([RFC&nbsp;8618](https://www.rfc-editor.org/rfc/rfc8618.html)), COSE&nbsp;([IETF&nbsp;STD&nbsp;96](https://www.rfc-editor.org/info/std96)), CWT&nbsp;([RFC&nbsp;8392](https://www.rfc-editor.org/info/rfc8392)), etc.
 
 Notably, CBOR-based data formats like CCF can be specified to support:
 - Deterministic encodings across programming languages. Encoders implemented in different languages can produce identical deterministic encodings.
 - Separate detection of malformed data and invalid data. Decoders can efficiently reject malformed inputs without creating Cadence objects.
 
-CBOR is well-suited to replace JSON in data formats and protocols. CBOR's data model extends JSON's data model with:
+CBOR is well-suited to replace JSON in data . CBOR's data model extends JSON's data model with:
 - compact binary encodings
 - extension points (CBOR Tags and Simple Values)
 - deterministic encoding (Core Deterministic Encoding Requirements)
