@@ -6,11 +6,11 @@ Date: March 28, 2025
 
 ## Abstract
 
-Cadence Compact Format (CCF) is a data format designed for compact, efficient, and deterministic encoding of [Cadence](https://github.com/onflow/cadence) external values. Cadence is a modern resource-oriented programming language used by [Flow](https://github.com/onflow/flow-go) blockchain.
+Cadence Compact Format (CCF) is a binary data format designed for compact, efficient, and deterministic encoding of [Cadence](https://github.com/onflow/cadence) external values. Cadence is a modern resource-oriented programming language used by [Flow](https://github.com/onflow/flow-go) blockchain.
 
 CCF messages can be fully self-describing or partially self-describing. Both are more compact than JSON-based messages. CCF-based protocols can send Cadence metadata just once for all messages of that type. Malformed data can be detected without Cadence metadata and without creating Cadence objects.
 
-CCF defines "Deterministic CCF Encoding Requirements" and makes it optional. CCF codecs implemented in different programming languages can produce the same deterministic encodings. CCF-based formats and protocols can balance trade-offs by specifying how they use CCF options.
+CCF specifies "Deterministic CCF Encoding Requirements" and makes it optional. CCF codecs implemented in different programming languages can produce the same deterministic encodings. CCF-based formats and protocols can balance trade-offs by specifying how they use CCF options.
 
 CCF obsoletes [JSON-Cadence Data Interchange Format](https://developers.flow.com/cadence/json-cadence-spec) (JSON-CDC) for use cases that do not require JSON.
 
@@ -32,7 +32,7 @@ This document does not specify how to encode version numbers of CCF itself, CCF-
 
 ## Introduction
 
-CCF is a data format that allows compact, efficient, and deterministic encoding of Cadence external values.
+CCF is a binary data format that allows compact, efficient, and deterministic encoding of Cadence external values.
 
 Cadence external values (e.g., events, transaction arguments, etc.) have been encoded using JSON-CDC, which is inefficient, verbose, and doesn't define deterministic encoding.
 
@@ -41,13 +41,13 @@ The same `FeesDeducted` event on the Flow blockchain can encode to:
 - 118 bytes in CCF (fully self-describing mode).
 - &nbsp;20 bytes in CCF (partially self-describing mode).
 
-CCF defines all requirements for deterministic encoding (sort orders, shortest forms, and Cadence-specific requirements) to allow CCF codecs implemented in different programming languages to produce the same deterministic encodings.
+CCF defines all requirements for deterministic encoding (sort orders, shortest forms, and Cadence-specific requirements), so that CCF codecs implemented in different programming languages can produce the same deterministic encodings.
 
-Some requirements (such as "Deterministic CCF Encoding Requirements") are defined as optional. The specification of each CCF-based format or protocol can specify how CCF options are used. This allows each protocol to balance trade-offs such as compatibility, determinism, speed, encoded data size, etc.
+Some requirements (such as "Deterministic CCF Encoding Requirements") are specified as optional. The specification of each CCF-based format or protocol can specify how CCF options are used. This allows each protocol to balance trade-offs such as compatibility, determinism, speed, encoded data size, etc.
 
-CCF uses CBOR to efficiently detect and reject malformed messages without creating Cadence objects. This allows more costly checks for validity, etc., to be performed only on well-formed messages.
+CCF allows efficient detection of malformed messages without creating Cadence objects. More costly validation is performed only on well-formed messages.
 
-CBOR is a binary data format specified by [RFC 8949](https://www.rfc-editor.org/info/std94) and designated by IETF as an [Internet Standard](https://www.ietf.org/rfc/std-index.txt) (STD&nbsp;94). CBOR is designed to be relevant for decades and is used by data formats and protocols such as [W3C&nbsp;WebAuthn](https://www.w3.org/TR/webauthn-2/), Compacted-DNS&nbsp;([RFC&nbsp;8618](https://www.rfc-editor.org/rfc/rfc8618.html)), COSE&nbsp;([IETF&nbsp;STD&nbsp;96](https://www.rfc-editor.org/info/std96)), CWT&nbsp;([RFC&nbsp;8392](https://www.rfc-editor.org/info/rfc8392)), etc.
+CCF uses a subset of the Concise Binary Object Representation (CBOR) format.  CBOR is a binary data format specified by [RFC 8949](https://www.rfc-editor.org/info/std94) and designated by IETF as an [Internet Standard](https://www.ietf.org/rfc/std-index.txt) (STD&nbsp;94). CBOR is designed to be relevant for decades and is used by data formats and protocols such as [W3C&nbsp;WebAuthn](https://www.w3.org/TR/webauthn-2/), Compacted-DNS&nbsp;([RFC&nbsp;8618](https://www.rfc-editor.org/rfc/rfc8618.html)), COSE&nbsp;([IETF&nbsp;STD&nbsp;96](https://www.rfc-editor.org/info/std96)), CWT&nbsp;([RFC&nbsp;8392](https://www.rfc-editor.org/info/rfc8392)), etc.
 
 ### Objectives
 
