@@ -2,7 +2,7 @@
 
 Author: Faye Amacker  
 Version: 1.0.0  
-Date: March 27, 2025
+Date: March 28, 2025
 
 ## Abstract
 
@@ -78,7 +78,7 @@ CCF is designed to support:
 
 - Interoperability and Reuse. CCF uses the same approach taken by COSE (RFC 9052) leveraging CBOR (RFC 8949). CCF leverages CBOR, which allows CCF codecs to use CBOR codecs under the hood.
 
-- Translation to JSON. CCF uses a subset of CBOR data model and RFC 8949 specifies how to convert data between CBOR and JSON.
+- Translation to JSON. CCF uses a subset of the CBOR data model, and RFC 8949 specifies how to convert data between CBOR and JSON.
 
 ### Why CBOR
 
@@ -224,7 +224,7 @@ A CCF encoding complies with "Valid CCF Encoding Requirements" if it complies wi
 
 - Elements MUST be unique in `entitlement-set-authorization-type.entitlements` or `entitlement-set-authorization-type-value.entitlements`.
  
-- Keys MUST be unique in `dict-value`. Decoders are not always required to check for duplicate dictionary keys. In some cases, checking for duplicate dictionary key is not necessary or it may be delegated to the application.
+- Keys MUST be unique in `dict-value`. Decoders are not always required to check for duplicate dictionary keys. In some cases, checking for duplicate dictionary keys is not necessary or the checking may be delegated to the application.
 
 ### Deterministic CCF Encoding Requirements
 
@@ -643,7 +643,7 @@ Cadence types and Cadence type values (run-time types) are encoded differently. 
 
 Cadence types are used to decode Cadence data, so they only contain information needed for decoding. For example, field information of a composite type is needed to decode the composite value. However, field information of an interface type isn't needed to decode values implementing the interface type.
 
-Cadence type value is a Cadence value which provides comprehensive information about a type. For example, composite type value and interface type value contain information about both fields and initializers.
+Cadence type value is a Cadence value that provides comprehensive information about a type. For example, composite type value and interface type value contain information about both fields and initializers.
 
 ### CCF Specified in CDDL Notation
 
@@ -1287,7 +1287,7 @@ type-value-ref =
 
 This document would not exist without Ramtin M. Seraj and Bastian Müller.
 
-Ramtin and Bastian's contributions on this effort is hard to list exhaustively because they inspire individuals and teams to produce impactful results.
+Ramtin and Bastian's contributions to this effort are hard to list exhaustively because they inspire individuals and teams to produce impactful results.
 
 Ramtin M. Seraj led the effort to require a deterministic and more compact alternative to JSON-Cadence Data Interchange Format. This document's "Objectives" section includes and adds to the initial objectives Ramtin listed (in a notion) for a binary format for Cadence external values.
 
