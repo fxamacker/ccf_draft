@@ -84,7 +84,7 @@ CCF is designed to support:
 
 CBOR is a binary data format specified by [RFC 8949](https://www.rfc-editor.org/info/std94) and designated by IETF as an [Internet Standard](https://www.ietf.org/rfc/std-index.txt) (STD&nbsp;94).
 
-Design goals of CBOR balances trade-offs, making it useful as a building block for new :
+Design goals of CBOR balances trade-offs, making it useful as a building block for new data formats and protocols:
 
 > The Concise Binary Object Representation (CBOR) is a data format
    whose design goals include the possibility of extremely small code
@@ -92,13 +92,13 @@ Design goals of CBOR balances trade-offs, making it useful as a building block f
    for version negotiation. These design goals make it different from
    earlier binary serializations such as ASN.1 and MessagePack.
 
-CBOR is used by data  such as [W3C&nbsp;WebAuthn](https://www.w3.org/TR/webauthn-2/), Compacted-DNS&nbsp;([RFC&nbsp;8618](https://www.rfc-editor.org/rfc/rfc8618.html)), COSE&nbsp;([IETF&nbsp;STD&nbsp;96](https://www.rfc-editor.org/info/std96)), CWT&nbsp;([RFC&nbsp;8392](https://www.rfc-editor.org/info/rfc8392)), etc.
+CBOR is used by data formats and protocols such as [W3C&nbsp;WebAuthn](https://www.w3.org/TR/webauthn-2/), Compacted-DNS&nbsp;([RFC&nbsp;8618](https://www.rfc-editor.org/rfc/rfc8618.html)), COSE&nbsp;([IETF&nbsp;STD&nbsp;96](https://www.rfc-editor.org/info/std96)), CWT&nbsp;([RFC&nbsp;8392](https://www.rfc-editor.org/info/rfc8392)), etc.
 
 Notably, CBOR-based data formats like CCF can be specified to support:
 - Deterministic encodings across programming languages. Encoders implemented in different languages can produce identical deterministic encodings.
 - Separate detection of malformed data and invalid data. Decoders can efficiently reject malformed inputs without creating Cadence objects.
 
-CBOR is well-suited to replace JSON in data . CBOR's data model extends JSON's data model with:
+CBOR is well-suited to replace JSON in data formats and protocols. CBOR's data model extends JSON's data model with:
 - compact binary encodings
 - extension points (CBOR Tags and Simple Values)
 - deterministic encoding (Core Deterministic Encoding Requirements)
