@@ -28,7 +28,7 @@ Some requirements defined in this document are explicitly specified as optional.
 
 It is outside the scope of this document to specify individual CCF-based protocols (e.g., events).  For example, CCF-based protocols MUST specify when encoders are required to emit CCF encodings that satisfy "Deterministic CCF Encoding Requirements."
 
-This document does not specify how to encode version numbers of CCF itself or CCF-based protocols.  CCF-based protocols can specify an encoding that uses CalVer, SemVer, sequence-based versioning, any other versioning, or no versioning.  Some CCF-based protocols may want to use CBOR Sequences ([RFC 8742](https://www.rfc-editor.org/rfc/rfc8742.html)) to provide a version number in the first CBOR data item, followed by CBOR data item(s) encoded in CCF.
+This document does not specify how to encode version numbers of CCF itself or CCF-based protocols.  CCF-based protocols can specify an encoding that uses CalVer, SemVer, sequence-based versioning, any other versioning, or no versioning.  Some CCF-based protocols may want to use CBOR Sequences ([RFC 8742](https://www.rfc-editor.org/rfc/rfc8742.html)) to provide a version number in the first CBOR data item, followed by CBOR data item(s) representing CCF message(s).
 
 ## Introduction
 
@@ -36,7 +36,7 @@ CCF is a binary data format that allows compact, efficient, and deterministic en
 
 Cadence external values (e.g., events, transaction arguments, etc.) have been encoded using JSON-CDC, which is inefficient, verbose, and doesn't define deterministic encoding.
 
-The same `FeesDeducted` event on the Flow blockchain can encode to:
+The same `FeesDeducted` event on the Flow blockchain can be encode to:
 - 298 bytes in JSON-CDC (minified).
 - 118 bytes in CCF (fully self-describing mode).
 - &nbsp;20 bytes in CCF (partially self-describing mode).
@@ -119,13 +119,13 @@ Projects implementing a CCF codec should evaluate more than one CBOR codec for s
 
 When evaluating or comparing codecs, benchmarks should include decoding malicious data.
 
-### Terminology
+### Notations and Terminology
+
+This document uses CDDL and EDN notations:
+- Concise Data Definition Language (CDDL) is defined by [RFC 8610](https://www.rfc-editor.org/rfc/rfc8610.html). CDDL is a notation for unambiguously expressing CBOR and JSON data structures.
+- Extended Diagnostic Notation (EDN) is defined by [Appendix G of RFC 8610](https://www.rfc-editor.org/rfc/rfc8610.html#appendix-G). EDN is a "diagnostic notation" used to converse about encoded CBOR data items.
 
 This specification uses requirements terminology, CBOR terminology, and CDDL terminology.
-
-This specification also uses the following notations:
-- Concise Data Definition Language (CDDL) defined by [RFC 8610](https://www.rfc-editor.org/rfc/rfc8610.html). CDDL is a notation for unambiguously expressing CBOR and JSON data structures.
-- Extended Diagnostic Notation (EDN) defined by [Appendix G of RFC 8610](https://www.rfc-editor.org/rfc/rfc8610.html#appendix-G). EDN is a "diagnostic notation" used to converse about encoded CBOR data items.
 
 #### Requirements Terminology
 
@@ -164,7 +164,7 @@ This specification uses CDDL notation to express CBOR data items:
 
 ## Serialization Considerations
 
-CCF is a data format that uses a subset of CBOR with additional requirements for validity and deterministic encoding.
+CCF is a binary data format that uses a subset of CBOR with additional requirements for validity and deterministic encoding.
 
 ### Cadence Types and Values Encoding
 
