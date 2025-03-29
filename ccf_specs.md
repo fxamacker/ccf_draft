@@ -2,7 +2,7 @@
 
 Author: Faye Amacker  
 Version: 1.0.0  
-Date: March 28, 2025
+Date: March 29, 2025
 
 ## Abstract
 
@@ -56,29 +56,29 @@ The goal of CCF is to provide compact, efficient, and deterministic encoding of 
 
 - CCF separates Cadence type encoding from Cadence value encoding. This has two distinct advantages:
 
-  - More compact encoding. Cadence type information is not repeatedly encoded unnecessarily in a message. For example, for a homogeneous array of a Cadence composite type, each element will not have its Cadence composite type information encoded repeatedly.
+  More compact encoding: Cadence type information is not repeatedly encoded unnecessarily in a message. For example, for a homogeneous array of a Cadence composite type, each element will not have its Cadence composite type information encoded repeatedly.
 
-  - Detachable Cadence type information. Although Cadence type information is required for decoding, CCF-based protocols can send a message's type information once instead of repeatedly sending it to the same client for all messages of that type.
+  Detachable Cadence type information: Although Cadence type information is required for decoding, CCF-based protocols can send a message's type information once instead of repeatedly sending it to the same client for all messages of that type.
 
 CCF is designed to support:
 
-- All current and future Cadence types, including composite types. CCF supports schemaless encoding and is extensible for new Cadence types.
+Cadence external values: CCF supports all built-in Cadence types and user-defined Cadence types (e.g. composite types). CCF can be updated to support new built-in Cadence types.
 
-- Compact encoding. Smaller encoded size is produced by:
-  - CBOR's data model with CBOR Preferred Serialization (more compact encoding of CBOR data items).
-  - Separate encoding of Cadence types and values to avoid repeatedly encoding the same Cadence type information unnecessarily.
+Compact encoding: Smaller encoded size is produced by:
+- CBOR's data model with CBOR Preferred Serialization (more compact encoding of CBOR data items).
+- Separate encoding of Cadence types and values to avoid repeatedly encoding the same Cadence type information unnecessarily.
 
-- Compact communications. Detachable Cadence type information allows CCF-based protocols to optionally avoid resending the same Cadence type information for all messages matching that type. CCF-based protocols can cache and uniquely identify a Cadence type so it can be matched to a Cadence value (such as an event) during decoding.
+Compact communications: Detachable Cadence type information allows CCF-based protocols to optionally avoid resending the same Cadence type information for all messages matching that type. CCF-based protocols can cache and uniquely identify a Cadence type so it can be matched to a Cadence value (such as an event) during decoding.
 
-- Deterministic encoding. CCF uses CBOR's Preferred Serialization to achieve deterministic encoding. Other parts of CBOR's Core Deterministic Encoding Requirements are not needed by this specification.
+Deterministic encoding: CCF uses CBOR's Preferred Serialization to achieve deterministic encoding. Other parts of CBOR's Core Deterministic Encoding Requirements are not needed by this specification.
 
-- Early detection of malformed data. CCF decoders can detect and reject malformed data without creating Cadence objects. CCF decoders can detect malformed data without having Cadence type information. If data is not malformed, then CCF decoders can proceed to detect and reject invalid CCF data as described in this document.
+Early detection of malformed data: CCF decoders can detect and reject malformed data without creating Cadence objects. CCF decoders can detect malformed data without having Cadence type information. If data is not malformed, then CCF decoders can proceed to detect and reject invalid CCF data as described in this document.
 
-- Extensibility. CCF encodes composite type information in a header (separate from data). Data refers to composite types by unique type ID, encoded as bytes. If the composite type information can be stored on-chain, the header won't need to be sent with the data. Type ID can be a universal counter, hash digest, or other unique identifier specified by CCF-based protocols.
+Extensibility: CCF encodes composite type information in a header (separate from data). Data refers to composite types by unique type ID, encoded as bytes. If the composite type information can be stored on-chain, the header won't need to be sent with the data. Type ID can be a universal counter, hash digest, or other unique identifier specified by CCF-based protocols.
 
-- Interoperability and Reuse. CCF uses the same approach taken by COSE (RFC 9052) leveraging CBOR (RFC 8949). CCF leverages CBOR, which allows CCF codecs to use CBOR codecs under the hood.
+Interoperability and reuse: CCF uses the same approach taken by COSE (RFC 9052) leveraging CBOR (RFC 8949). CCF leverages CBOR, which allows CCF codecs to use CBOR codecs under the hood.
 
-- Translation to JSON. CCF uses a subset of the CBOR data model, and RFC 8949 specifies how to convert data between CBOR and JSON.
+Translation to JSON: CCF uses a subset of the CBOR data model, and RFC 8949 specifies how to convert data between CBOR and JSON.
 
 ### Why CBOR
 
