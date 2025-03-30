@@ -2,13 +2,13 @@
 
 Author: Faye Amacker  
 Version: 1.0.0  
-Date: March 29, 2025
+Date: March 30, 2025
 
 ## Abstract
 
 Cadence Compact Format (CCF) is a binary data format designed for compact, efficient, and deterministic encoding of [Cadence](https://github.com/onflow/cadence) external values. Cadence is a modern resource-oriented programming language used by [Flow](https://github.com/onflow/flow-go) blockchain.
 
-CCF messages can be fully self-describing or partially self-describing. Both are more compact than JSON-based messages. CCF-based protocols can send Cadence metadata just once and CCF messages can reuse it. Malformed data can be detected without Cadence metadata and without creating Cadence objects.
+CCF messages can be fully self-describing or partially self-describing. Both are more compact than JSON-based messages. CCF-based protocols can send Cadence metadata once, and CCF messages can reuse it. Malformed data can be detected without Cadence metadata and without creating Cadence objects.
 
 CCF specifies "Deterministic CCF Encoding Requirements" and makes it optional. CCF codecs implemented in different programming languages can produce the same deterministic encodings. CCF-based protocols can balance trade-offs by specifying how they use optional CCF requirements.
 
@@ -36,12 +36,12 @@ CCF is a binary data format that allows compact, efficient, and deterministic en
 
 Cadence external values (e.g., events, transaction arguments, etc.) have been encoded using JSON-CDC, which is inefficient, verbose, and doesn't define deterministic encoding.
 
-The same `FeesDeducted` event on the Flow blockchain can be encode to:
+The same `FeesDeducted` event on the Flow blockchain can be encoded to:
 - 298 bytes in JSON-CDC (minified).
 - 118 bytes in CCF (fully self-describing mode).
 - &nbsp;20 bytes in CCF (partially self-describing mode).
 
-CCF defines all requirements for deterministic encoding (sort orders, shortest forms, and Cadence-specific requirements), so that CCF codecs implemented in different programming languages can produce the same deterministic encodings.
+CCF defines all requirements for deterministic encoding (sort orders, shortest forms, and Cadence-specific requirements) so that CCF codecs implemented in different programming languages can produce the same deterministic encodings.
 
 Some requirements (such as "Deterministic CCF Encoding Requirements") are specified as optional. The specification of each CCF-based protocol determines how it uses optional CCF requirements. This allows each protocol to balance trade-offs such as compatibility, determinism, speed, encoded data size, etc.
 
@@ -52,12 +52,12 @@ CCF uses a subset of the Concise Binary Object Representation (CBOR) format.  CB
 ### Objectives
 
 The goal of CCF is to provide compact, efficient, and deterministic encoding of Cadence external values with:
-- Fully self-decribing mode: CCF messages include Cadence types and values.
+- Fully self-describing mode: CCF messages include Cadence types and values.
 - Partially self-describing mode: CCF messages include Cadence values referencing omitted Cadence types by unique type ID.
 
 CCF is designed to support:
 
-- Cadence external values: CCF supports all Cadence built-in types and user-defined types (e.g. composite types). CCF can be updated to support new Cadence built-in types.
+- Cadence external values: CCF supports all Cadence built-in types and user-defined types (e.g., composite types). CCF can be updated to support new Cadence built-in types.
 
 - Compact encoding:
   - CCF uses a subset of the CBOR data model with [Preferred Serialization](https://www.rfc-editor.org/rfc/rfc8949.html#name-preferred-serialization) to encode values to their shortest form.
@@ -193,7 +193,7 @@ A CCF encoding complies with "Valid CCF Encoding Requirements" if it complies wi
 
 - CBOR data items MUST be well-formed and valid as defined in RFC 8949. For example, CBOR text strings MUST contain valid UTF-8. As an exception, RFC 8949 requirements for CBOR maps are not applicable because CCF does not use CBOR maps.
 
-- CCF encodings MUST comply with specifications in "CCF Specified in CDDL Notation" section of this document.
+- CCF encodings MUST comply with specifications in the "CCF Specified in CDDL Notation" section of this document.
 
 - `composite-type.id` MUST be unique in `ccf-typedef-message` or `ccf-typedef-and-value-message`.
 
@@ -219,7 +219,7 @@ A CCF encoding complies with "Valid CCF Encoding Requirements" if it complies wi
 
 - Elements MUST be unique in `entitlement-set-authorization-type.entitlements` or `entitlement-set-authorization-type-value.entitlements`.
  
-- Keys MUST be unique in `dict-value`. Decoders are not always required to check for duplicate dictionary keys. In some cases, checking for duplicate dictionary keys is not necessary or the checking may be delegated to the application.
+- Keys MUST be unique in `dict-value`. Decoders are not always required to check for duplicate dictionary keys. In some cases, checking for duplicate dictionary keys is not necessary, or the checking may be delegated to the application.
 
 ### Deterministic CCF Encoding Requirements
 
