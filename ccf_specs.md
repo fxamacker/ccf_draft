@@ -260,17 +260,13 @@ A CCF encoding satisfies the "Deterministic CCF Encoding Requirements" if it sat
 
 CBOR security considerations in [Section 10](https://www.rfc-editor.org/rfc/rfc8949.html#name-security-considerations) of RFC 8949 apply to CCF.
 
-There are two types of checks for acceptable data:
-- well-formedness
-- validity
+There are two types of checks for acceptable data: well-formedness and validity.
 
-CBOR defines data [well-formedness](https://www.rfc-editor.org/rfc/rfc8949.html#name-well-formedness-errors-and-), and a CBOR decoder MUST detect and reject malformed data before checking for validity.
-
-CCF decoders MUST detect and reject malformed data before checking for validity.
+CCF decoders MUST detect and reject malformed data before checking for validity.  [Appendix F](https://www.rfc-editor.org/rfc/rfc8949.html#name-well-formedness-errors-and-) of RFC 8949 defines well-formedness of encoded CBOR data.
 
 CCF decoders SHOULD detect and reject malformed data before creating Cadence objects and without requiring Cadence type information.
 
-CCF decoders can handle invalid CCF messages as required by each CCF-based protocol. In some cases, it may be more practical for the application to check if the decoded data is acceptable.
+Each CCF-based protocol MUST specify how to handle invalid CCF messages.  In some cases, it may be more practical for the application to check if the decoded data is acceptable.
 
 CCF decoders SHOULD allow CBOR limits to be specified and enforced, such as:
 - maximum number of array elements
