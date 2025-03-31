@@ -24,7 +24,7 @@ This document is licensed under the terms of the Apache License, Version 2.0. Se
 
 This document specifies Cadence Compact Format.
 
-Some requirements defined in this document are explicitly specified as optional.  
+This document explicitly specifies some requirements as optional. 
 
 It is outside the scope of this document to specify individual CCF-based protocols (e.g., events).  For example, CCF-based protocols MUST specify when encoders are required to emit CCF encodings that satisfy "Deterministic CCF Encoding Requirements."
 
@@ -55,9 +55,9 @@ The goal of CCF is to provide compact, efficient, and deterministic encoding of 
 - Fully self-describing mode: CCF messages include Cadence types and values.
 - Partially self-describing mode: CCF messages include Cadence values referencing omitted Cadence types by unique type ID.
 
-CCF is designed to support:
+CCF supports:
 
-- Cadence external values: CCF supports all Cadence built-in types and user-defined types (e.g., composite types). CCF can be updated to support new Cadence built-in types.
+- Cadence external values: CCF supports all Cadence built-in types and user-defined types (e.g., composite types).  For extensibility, CCF reserves multiple ranges of CBOR tag numbers (unassigned by IANA) for future Cadence built-in data types.
 
 - Compact encoding:
   - CCF uses a subset of the CBOR data model with [Preferred Serialization](https://www.rfc-editor.org/rfc/rfc8949.html#name-preferred-serialization) to encode values to their shortest form.
@@ -69,11 +69,14 @@ CCF is designed to support:
 
 - Deterministic encoding: CCF uses CBOR's Preferred Serialization to achieve deterministic encoding.  Other parts of CBOR's Core Deterministic Encoding Requirements are not needed by this specification.
 
-- Early detection of malformed data: CCF decoders can detect malformed data without having Cadence type information.  CCF decoders can detect and reject malformed data without creating Cadence objects.  If data is not malformed, then CCF decoders can proceed to detect and reject invalid CCF data as described in this document.
+- Early detection of malformed data: CCF decoders can detect malformed data without having Cadence type information.  CCF decoders can detect and reject malformed data without creating Cadence objects.  If data is well-formed, CCF decoders can proceed to detect and reject invalid CCF data as described in this document.
 
-- Interoperability and reuse: CCF uses CBOR, so CCF codecs can use existing CBOR codecs that are well-tested and widely used by other projects.
+- Interoperability and reuse: CCF uses CBOR, so CCF codecs can use generic CBOR codecs that are well-tested and widely used by other projects.
 
-- Translation to JSON: CCF uses a subset of the CBOR data model, and RFC 8949 specifies how to convert data between CBOR and JSON.
+- Converting Data Between CCF and JSON: CCF uses a subset of the CBOR data model, and RFC 8949 provides [guidance on converting data between CBOR and JSON](https://www.rfc-editor.org/rfc/rfc8949.html#name-converting-data-between-cbo).
+
+- Converting Data Between CCF and JSON: CCF uses a subset of the CBOR data model.  So the guidance in RFC 8949 on [converting data between CBOR and JSON](https://www.rfc-editor.org/rfc/rfc8949.html#name-converting-data-between-cbo) is applicable to CCF.
+
 
 ### Why CBOR
 
