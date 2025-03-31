@@ -314,7 +314,7 @@ The CCF data item in diagnostic notation is `130([137(4), 42])`:
 - `137(4)` is the Cadence `Int`.
 - `42` is the raw value.
 
-Type definition is not needed because Cadence `Int` is a Simple Type (e.g., not a user-defined composite).
+A type definition is not needed because Cadence `Int` is a Simple Type (e.g., not a user-defined composite).
 
 ### Cadence Homogeneous Array with Simple Type Elements
 
@@ -459,7 +459,7 @@ CCF encoding (in hex for readability):
 
 `d8818281d8a183406a532e746573742e466f6f818263626172d8890482d88bd888408381c2410181c2410281c24103`
 
-In fully self-describing mode, CCF data items contain type definition and value.
+In fully self-describing mode, a CCF data item can contain the value and type definition(s) used by the value.
 
 The CCF data item in diagnostic notation is:
 
@@ -562,7 +562,7 @@ CCF encoding (in fully self-describing mode):
 
 `d8818281d8a183406a532e746573742e466f6f828263626172d88904826362617ad889182782d88bd888408382c24101d88282d88904c2410182c24102d88282d88901616182c24103d88282d88900f5`
 
-In fully self-describing mode, CCF data items contain type definition and value.
+In fully self-describing mode, a CCF data item can contain the value and type definition(s) used by the value.
 
 The CCF data item in diagnostic notation is:
 
