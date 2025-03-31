@@ -229,7 +229,7 @@ A CCF encoding is deterministic if it satisfies the "Deterministic CCF Encoding 
 Encoders SHOULD emit deterministic CCF encodings.  However, some CCF-based protocols may not require deterministic CCF encodings.
 
 CCF-based protocols MUST specify when encoders are required to emit deterministic CCF encodings. For example:
-- A CCF-based protocol for encoding transaction arguments might want to specify that encoders MUST produce deterministic encodings of the values.
+- A CCF-based protocol that prioritizes security above performance (or requires explicitly sorted fields) might want to specify that encoders MUST produce deterministic encodings of the values.
 - A CCF-based protocol for encoding unsorted fields might want to specify that encoders are not required to produce deterministic encodings of the values (if compatibility with legacy systems is a higher priority than "Deterministic CCF Encoding Requirements"). 
 
 Decoders SHOULD check CCF encodings to determine whether they are deterministic encodings. CCF-based protocols MUST specify when decoders are required to check for deterministic encodings and how to handle nondeterministic encodings.
@@ -238,7 +238,7 @@ A CCF encoding satisfies the "Deterministic CCF Encoding Requirements" if it sat
 
 - CCF encodings MUST satisfy "Valid CCF Encoding Requirements" defined in this document.
 
-- CCF encodings MUST satisfy "Core Deterministic Encoding Requirements" defined in RFC 8948 Section 4.2.1. As an exception, RFC 8949 requirements for CBOR maps are not applicable because CCF does not use CBOR maps.
+- CCF encodings MUST satisfy the Core Deterministic Encoding Requirements defined in [Section 4.2.1](https://www.rfc-editor.org/rfc/rfc8949.html#name-core-deterministic-encoding) of RFC 8949. As an exception, RFC 8949 requirements for CBOR maps are not applicable because CCF does not use CBOR maps.
 
 - `composite-type.id` in `ccf-typedef-and-value-message` MUST be identical to its zero-based index in `composite-typedef`.
 
@@ -258,7 +258,7 @@ A CCF encoding satisfies the "Deterministic CCF Encoding Requirements" if it sat
 
 ## Security Considerations
 
-CBOR security considerations in [Section 10 of RFC 8949 (CBOR)](https://www.rfc-editor.org/rfc/rfc8949.html#name-security-considerations) apply to CCF.
+CBOR security considerations in [Section 10](https://www.rfc-editor.org/rfc/rfc8949.html#name-security-considerations) of RFC 8949 apply to CCF.
 
 There are two types of checks for acceptable data:
 - well-formedness
