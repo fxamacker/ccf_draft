@@ -73,8 +73,6 @@ CCF supports:
 
 - Interoperability and reuse: CCF uses CBOR, so CCF codecs can use generic CBOR codecs that are well-tested and widely used by other projects.
 
-- Converting Data Between CCF and JSON: CCF uses a subset of the CBOR data model, and RFC 8949 provides [guidance on converting data between CBOR and JSON](https://www.rfc-editor.org/rfc/rfc8949.html#name-converting-data-between-cbo).
-
 - Converting Data Between CCF and JSON: CCF uses a subset of the CBOR data model.  So the guidance in RFC 8949 on [converting data between CBOR and JSON](https://www.rfc-editor.org/rfc/rfc8949.html#name-converting-data-between-cbo) is applicable to CCF.
 
 
