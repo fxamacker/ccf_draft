@@ -202,7 +202,7 @@ A CCF encoding complies with "Valid CCF Encoding Requirements" if it complies wi
 
 - `composite-type.cadence-type-id` MUST be unique in `ccf-typedef-message` or `ccf-typedef-and-value-message`.
 
-- `field-name` MUST be unique in `composite-type`.
+- `field-name` MUST be unique in `composite-type.fields`.
 
 - `type-ref.id` MUST refer to `composite-type.id`.
 
