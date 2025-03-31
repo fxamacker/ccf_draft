@@ -262,7 +262,7 @@ CBOR security considerations in [Section 10](https://www.rfc-editor.org/rfc/rfc8
 
 There are two types of checks for acceptable data: well-formedness and validity.
 
-CCF decoders MUST detect and reject malformed data before checking for validity.  [Appendix F](https://www.rfc-editor.org/rfc/rfc8949.html#name-well-formedness-errors-and-) of RFC 8949 defines well-formedness of encoded CBOR data.
+CCF decoders MUST detect and reject malformed data items before checking for validity.  [Section 1.2](https://www.rfc-editor.org/rfc/rfc8949.html#section-1.2) of RFC 8949 defines "well-formed" data items.
 
 CCF decoders SHOULD detect and reject malformed data before creating Cadence objects and without requiring Cadence type information.
 
